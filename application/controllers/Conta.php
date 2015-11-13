@@ -3,6 +3,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Conta extends CI_Controller {
 
+  public function __construct()
+  {      
+    parent::__construct();
+
+    if($this->session->userdata('logado'))
+    {
+      if(!$this->uri->segment(2) == "sair")
+      {
+        redirect('dashboard');
+      }
+    }
+      
+  }
+
   public function entrar(){
   
     $alerta = null;
@@ -45,7 +59,7 @@ class Conta extends CI_Controller {
           // Inicializa a sessão
           $this->session->set_userdata($session);
           
-          redirect('welcome');
+          redirect('dashboard');
           
         }
         else
